@@ -48,4 +48,4 @@ class Soundboard:
 
 if __name__ == "__main__":
     soundboard = Soundboard()
-    soundboard.app.run(debug=False)
+    soundboard.app.run(host="0.0.0.0", port=5000)
