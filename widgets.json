@@ -1,0 +1,6 @@
+[
+    {
+        "icon": "https://www.google.com/favicon.ico",
+        "action": "echo hi"
+    }
+]
