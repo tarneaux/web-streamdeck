@@ -37,7 +37,6 @@ class Soundboard:
             return start + "\n".join(["<img id=\"{}\" src=\"{}\" width=128></img>".format(link, widget["icon"]) for link, widget in zip(self.links, self.widgets)]) + end
         @self.app.route("/<link>")
         def run(link):
-            self.refresh_widgets()
             widget = self.widgets[int(link)]
             threading.Thread(target = lambda: os.system(widget["action"])).start()
             return ""
