@@ -1,7 +1,7 @@
 import flask
 import json
 import os
-
+import threading
 
 start = """
 <!DOCTYPE html>
@@ -34,12 +34,12 @@ class Soundboard:
         @self.app.route("/")
         def index():
             self.refresh_widgets()
-            return start + "\n".join(["<img id=\"{}\" src=\"{}\"></img>".format(link, widget["icon"]) for link, widget in zip(self.links, self.widgets)]) + end
+            return start + "\n".join(["<img id=\"{}\" src=\"{}\" width=128></img>".format(link, widget["icon"]) for link, widget in zip(self.links, self.widgets)]) + end
         @self.app.route("/<link>")
         def run(link):
             self.refresh_widgets()
             widget = self.widgets[int(link)]
-            os.system(widget["action"])
+            threading.Thread(target = lambda: os.system(widget["action"])).start()
             return ""
     def refresh_widgets(self):
         self.widgets = json.load(open("widgets.json"))
